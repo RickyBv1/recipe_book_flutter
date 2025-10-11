@@ -27,6 +27,32 @@ class RecipeBook extends StatelessWidget {
         backgroundColor: Colors.indigo,
         title: const Text('Recipe Book', style: TextStyle(color: Colors.white)),
       ),
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: 125,
+        child: Card(
+          child: Row(
+            children: <Widget>[
+              SizedBox(
+                height: 125,
+                width: 100,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(),
+                ),
+              ),
+              SizedBox(width: 26),
+              Column(
+                children: <Widget>[
+                  Text('Lasagna'),
+                  Text('Ricky Cortes'),
+                  Container(height: 2, width: 75, color: Colors.indigo),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
