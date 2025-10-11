@@ -24,9 +24,12 @@ class HomeScreen extends StatelessWidget {
               Container(
                 height: 125,
                 width: 100,
-                decoration: BoxDecoration(
+                child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  color: Colors.indigo,
+                  child: Image.network(
+                    'https://www.tasteofhome.com/wp-content/uploads/2025/07/Best-Lasagna_EXPS_ATBBZ25_36333_DR_07_01_2b.jpg',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               SizedBox(width: 26),
