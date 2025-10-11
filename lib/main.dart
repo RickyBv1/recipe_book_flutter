@@ -9,9 +9,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Hello World',
-      home: Scaffold(body: const Text('Hello, World!')),
+      home: RecipeBook(),
+    );
+  }
+}
+
+class RecipeBook extends StatelessWidget {
+  const RecipeBook({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.indigo,
+        title: const Text('Recipe Book', style: TextStyle(color: Colors.white)),
+      ),
     );
   }
 }
