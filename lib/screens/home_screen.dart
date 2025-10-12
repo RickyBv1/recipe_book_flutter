@@ -21,10 +21,11 @@ class HomeScreen extends StatelessWidget {
 
   Future<void> _showButton(BuildContext context) {
     return showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (context) => Container(
         width: MediaQuery.of(context).size.width,
-        height: 500,
+        height: 600,
         color: Colors.white,
         child: RecipeForm(),
       ),
@@ -80,7 +81,7 @@ class RecipeForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(12.0),
       child: Form(
         //key: _formKey,
         child: Column(
@@ -91,14 +92,32 @@ class RecipeForm extends StatelessWidget {
               style: TextStyle(color: Colors.indigo, fontSize: 24),
             ),
             SizedBox(height: 16),
-            _buildTextField(label: 'Recipe Name'),
+            _buildTextField(
+              label: 'Recipe Name',
+              prefixIcon: Icon(Icons.restaurant, color: Colors.indigo),
+            ),
+            SizedBox(height: 16),
+            _buildTextField(
+              label: 'Author Name',
+              prefixIcon: Icon(Icons.person, color: Colors.indigo),
+            ),
+            SizedBox(height: 16),
+            _buildTextField(
+              label: 'Image URL',
+              prefixIcon: Icon(Icons.image, color: Colors.indigo),
+            ),
+            SizedBox(height: 16),
+            _buildTextField(
+              label: 'Recipe Instructions',
+              prefixIcon: Icon(Icons.description, color: Colors.indigo),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTextField({required String label}) {
+  Widget _buildTextField({required String label, required Icon prefixIcon}) {
     return TextFormField(
       decoration: InputDecoration(
         labelText: label,
@@ -108,6 +127,7 @@ class RecipeForm extends StatelessWidget {
           borderSide: BorderSide(color: Colors.indigo, width: 1),
           borderRadius: BorderRadius.circular(10),
         ),
+        prefixIcon: prefixIcon,
       ),
     );
   }
