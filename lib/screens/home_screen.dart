@@ -9,6 +9,25 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: <Widget>[_RecipeCard(context), _RecipeCard(context)],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.indigoAccent,
+        child: Icon(Icons.add, color: Colors.white),
+        onPressed: () {
+          _showButton(context);
+        },
+      ),
+    );
+  }
+
+  Future<void> _showButton(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        width: MediaQuery.of(context).size.width,
+        height: 500,
+        color: Colors.white,
+        child: RecipeForm(),
+      ),
     );
   }
 
@@ -21,7 +40,7 @@ class HomeScreen extends StatelessWidget {
         child: Card(
           child: Row(
             children: <Widget>[
-              Container(
+              SizedBox(
                 height: 125,
                 width: 100,
                 child: ClipRRect(
@@ -49,6 +68,45 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class RecipeForm extends StatelessWidget {
+  const RecipeForm({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Form(
+        //key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Add a new recipe',
+              style: TextStyle(color: Colors.indigo, fontSize: 24),
+            ),
+            SizedBox(height: 16),
+            _buildTextField(label: 'Recipe Name'),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField({required String label}) {
+    return TextFormField(
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: Colors.indigo, fontFamily: 'Roboto'),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.indigo, width: 1),
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
     );
