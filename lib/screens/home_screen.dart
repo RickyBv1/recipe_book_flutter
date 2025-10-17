@@ -7,6 +7,11 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   Future<List<dynamic>> FetchRecipes() async {
+    /* Puertos para acceder a la data
+    Android: 10.0.2.2
+    IOS: 127.0.0.1
+    Currently running on: localhost:3058 due to developer preferences
+    */
     final url = Uri.parse('http://localhost:3058/recipes');
     final response = await http.get(url);
     final data = jsonDecode(response.body);
@@ -15,10 +20,18 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FetchRecipes();
     return Scaffold(
-      body: Column(
-        children: <Widget>[_RecipeCard(context), _RecipeCard(context)],
+      body: FutureBuilder<List<dynamic>>(
+        future: FetchRecipes(),
+        builder: (context, snapshot) {
+          final recipes = snapshot.data ?? [];
+          return ListView.builder(
+            itemCount: recipes.length,
+            itemBuilder: (context, index) {
+              return _RecipeCard(context, recipes[index]);
+            },
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.indigoAccent,
@@ -47,14 +60,16 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _RecipeCard(BuildContext context) {
+  Widget _RecipeCard(BuildContext context, dynamic recipe) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                RecipeDetail(recipeName: 'lasagna', authorName: 'Ricky Cortes'),
+            builder: (context) => RecipeDetail(
+              recipeName: recipe['name'],
+              authorName: recipe['author'],
+            ),
           ),
         );
       },
@@ -72,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(
-                      'https://www.tasteofhome.com/wp-content/uploads/2025/07/Best-Lasagna_EXPS_ATBBZ25_36333_DR_07_01_2b.jpg',
+                      recipe['image_link'],
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -83,13 +98,13 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Lasagna',
+                      recipe['name'],
                       style: TextStyle(fontSize: 16, fontFamily: 'Roboto'),
                     ),
                     SizedBox(height: 4),
                     Container(height: 2, width: 75, color: Colors.indigo),
                     Text(
-                      'Ricky Cortes',
+                      recipe['author'],
                       style: TextStyle(fontFamily: 'Roboto'),
                     ),
                     SizedBox(height: 4),
