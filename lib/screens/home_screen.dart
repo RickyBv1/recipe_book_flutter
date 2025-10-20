@@ -1,49 +1,32 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_book_flutter/models/recipe_model.dart';
 import 'package:recipe_book_flutter/screens/recipe_detail.dart';
-import 'package:http/http.dart' as http;
+import 'package:recipe_book_flutter/providers/recipes_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  Future<List<dynamic>> FetchRecipes() async {
-    /* Puertos para acceder a la data
-    Android: 10.0.2.2
-    IOS: 127.0.0.1
-    Currently running on: localhost:3058 due to developer preferences
-    */
-    final url = Uri.parse('http://localhost:3058/recipes');
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        return data['recipes'];
-      } else {
-        print('Error ${response.statusCode}');
-        return [];
-      }
-    } catch (e) {
-      print('Request error');
-      return [];
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final recipesProvider = Provider.of<RecipesProvider>(
+      context,
+      listen: false,
+    );
+    recipesProvider.FetchRecipes();
+
     return Scaffold(
-      body: FutureBuilder<List<dynamic>>(
-        future: FetchRecipes(),
-        builder: (context, snapshot) {
-          final recipes = snapshot.data ?? [];
-          if (snapshot.connectionState == ConnectionState.waiting) {
+      body: Consumer<RecipesProvider>(
+        builder: (context, provider, child) {
+          if (provider.isLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          } else if (provider.recipes.isEmpty) {
             return const Center(child: Text('No recipes found'));
           } else {
             return ListView.builder(
-              itemCount: recipes.length,
+              itemCount: provider.recipes.length,
               itemBuilder: (context, index) {
-                return _RecipeCard(context, recipes[index]);
+                return _RecipeCard(context, provider.recipes[index]);
               },
             );
           }
@@ -76,15 +59,15 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _RecipeCard(BuildContext context, dynamic recipe) {
+  Widget _RecipeCard(BuildContext context, Recipe recipe) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => RecipeDetail(
-              recipeName: recipe['name'],
-              authorName: recipe['author'],
+              recipeName: recipe.name,
+              authorName: recipe.author,
             ),
           ),
         );
@@ -102,10 +85,7 @@ class HomeScreen extends StatelessWidget {
                   width: 100,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: Image.network(
-                      recipe['image_link'],
-                      fit: BoxFit.cover,
-                    ),
+                    child: Image.network(recipe.image_link, fit: BoxFit.cover),
                   ),
                 ),
                 SizedBox(width: 26),
@@ -114,13 +94,13 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      recipe['name'],
+                      recipe.name,
                       style: TextStyle(fontSize: 16, fontFamily: 'Roboto'),
                     ),
                     SizedBox(height: 4),
                     Container(height: 2, width: 75, color: Colors.indigo),
                     Text(
-                      recipe['author'],
+                      'By: ${recipe.author}',
                       style: TextStyle(fontFamily: 'Roboto'),
                     ),
                     SizedBox(height: 4),
