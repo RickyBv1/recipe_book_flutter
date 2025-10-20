@@ -57,6 +57,36 @@ class _RecipeDetailState extends State<RecipeDetail> {
           ),
         ],
       ),
+      body: Padding(
+        padding: EdgeInsets.all(18.0),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 200,
+              width: double.infinity,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.network(
+                  widget.recipesData.image_link,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Text(
+              'Recipe Steps:',
+              style: TextStyle(fontSize: 16, fontFamily: 'Roboto'),
+            ),
+            Text(
+              widget.recipesData.recipeSteps.join('\n'),
+              style: TextStyle(fontSize: 16, fontFamily: 'Roboto'),
+            ),
+            Text(
+              'By: ${widget.recipesData.author}',
+              style: TextStyle(fontSize: 16, fontFamily: 'Roboto'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
