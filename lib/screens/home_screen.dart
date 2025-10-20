@@ -1,24 +1,37 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_book_flutter/models/recipe_model.dart';
 import 'package:recipe_book_flutter/screens/recipe_detail.dart';
-import 'package:http/http.dart' as http;
+import 'package:recipe_book_flutter/providers/recipes_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  Future<List<dynamic>> FetchRecipes() async {
-    final url = Uri.parse('http://localhost:3058/recipes');
-    final response = await http.get(url);
-    final data = jsonDecode(response.body);
-    return data['recipes'];
-  }
-
   @override
   Widget build(BuildContext context) {
-    FetchRecipes();
+    final recipesProvider = Provider.of<RecipesProvider>(
+      context,
+      listen: false,
+    );
+    recipesProvider.FetchRecipes();
+
     return Scaffold(
-      body: Column(
-        children: <Widget>[_RecipeCard(context), _RecipeCard(context)],
+      backgroundColor: Colors.white,
+      body: Consumer<RecipesProvider>(
+        builder: (context, provider, child) {
+          if (provider.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (provider.recipes.isEmpty) {
+            return const Center(child: Text('No recipes found'));
+          } else {
+            return ListView.builder(
+              itemCount: provider.recipes.length,
+              itemBuilder: (context, index) {
+                return _RecipeCard(context, provider.recipes[index]);
+              },
+            );
+          }
+        },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.indigoAccent,
@@ -47,14 +60,13 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _RecipeCard(BuildContext context) {
+  Widget _RecipeCard(BuildContext context, Recipe recipe) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                RecipeDetail(recipeName: 'lasagna', authorName: 'Ricky Cortes'),
+            builder: (context) => RecipeDetail(recipesData: recipe),
           ),
         );
       },
@@ -71,10 +83,7 @@ class HomeScreen extends StatelessWidget {
                   width: 100,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: Image.network(
-                      'https://www.tasteofhome.com/wp-content/uploads/2025/07/Best-Lasagna_EXPS_ATBBZ25_36333_DR_07_01_2b.jpg',
-                      fit: BoxFit.cover,
-                    ),
+                    child: Image.network(recipe.image_link, fit: BoxFit.cover),
                   ),
                 ),
                 SizedBox(width: 26),
@@ -83,13 +92,13 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Lasagna',
+                      recipe.name,
                       style: TextStyle(fontSize: 16, fontFamily: 'Roboto'),
                     ),
                     SizedBox(height: 4),
                     Container(height: 2, width: 75, color: Colors.indigo),
                     Text(
-                      'Ricky Cortes',
+                      'By: ${recipe.author}',
                       style: TextStyle(fontFamily: 'Roboto'),
                     ),
                     SizedBox(height: 4),
