@@ -6,6 +6,7 @@ import 'dart:convert';
 class RecipesProvider extends ChangeNotifier {
   bool isLoading = false;
   List<Recipe> recipes = [];
+  List<Recipe> favoriteRecipe = [];
 
   Future<void> FetchRecipes() async {
     isLoading = true;
@@ -33,6 +34,31 @@ class RecipesProvider extends ChangeNotifier {
       recipes = [];
     } finally {
       isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> toggleFavoriteStatus(Recipe recipe) async {
+    final isFavorite = favoriteRecipe.contains(recipe);
+
+    try {
+      final url = Uri.parse('http://localhost:3058/favorites');
+      final response = isFavorite
+          ? await http.delete(url, body: json.encode({'id': recipe.id}))
+          : await http.post(url, body: json.encode(recipe.toJson()));
+      if (response.statusCode == 200) {
+        if (isFavorite) {
+          favoriteRecipe.remove(recipe);
+        } else {
+          favoriteRecipe.add(recipe);
+        }
+        notifyListeners();
+      } else {
+        throw Exception('Failed to update favorite status');
+      }
+    } catch (e) {
+      print('Request error ${e}');
+    } finally {
       notifyListeners();
     }
   }

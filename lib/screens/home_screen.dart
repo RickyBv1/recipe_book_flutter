@@ -16,6 +16,7 @@ class HomeScreen extends StatelessWidget {
     recipesProvider.FetchRecipes();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Consumer<RecipesProvider>(
         builder: (context, provider, child) {
           if (provider.isLoading) {
@@ -65,10 +66,7 @@ class HomeScreen extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => RecipeDetail(
-              recipeName: recipe.name,
-              authorName: recipe.author,
-            ),
+            builder: (context) => RecipeDetail(recipesData: recipe),
           ),
         );
       },
