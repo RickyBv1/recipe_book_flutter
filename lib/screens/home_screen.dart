@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:recipe_book_flutter/models/recipe_model.dart';
 import 'package:recipe_book_flutter/screens/recipe_detail.dart';
 import 'package:recipe_book_flutter/providers/recipes_provider.dart';
+import 'package:recipe_book_flutter/providers/theme_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -33,13 +34,44 @@ class HomeScreen extends StatelessWidget {
           }
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        child: Icon(Icons.add, color: Colors.white),
-        onPressed: () {
-          _showButton(context);
-        },
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: FloatingActionButton(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              onPressed: () {
+                Provider.of<ThemeProvider>(
+                  context,
+                  listen: false,
+                ).toggleTheme();
+              },
+              child: Consumer<ThemeProvider>(
+                builder: (context, themeProvider, child) {
+                  return Icon(
+                    themeProvider.themeData.brightness == Brightness.dark
+                        ? Icons.light_mode_outlined
+                        : Icons.dark_mode_outlined,
+                    color: Colors.white,
+                  );
+                },
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 20.0),
+            child: FloatingActionButton(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              child: Icon(Icons.add, color: Colors.white),
+              onPressed: () {
+                _showButton(context);
+              },
+            ),
+          ),
+        ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
