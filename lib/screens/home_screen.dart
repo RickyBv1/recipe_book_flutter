@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:recipe_book_flutter/models/recipe_model.dart';
 import 'package:recipe_book_flutter/screens/recipe_detail.dart';
 import 'package:recipe_book_flutter/providers/recipes_provider.dart';
+import 'package:recipe_book_flutter/providers/theme_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,7 +17,7 @@ class HomeScreen extends StatelessWidget {
     recipesProvider.FetchRecipes();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Consumer<RecipesProvider>(
         builder: (context, provider, child) {
           if (provider.isLoading) {
@@ -33,13 +34,44 @@ class HomeScreen extends StatelessWidget {
           }
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.indigoAccent,
-        child: Icon(Icons.add, color: Colors.white),
-        onPressed: () {
-          _showButton(context);
-        },
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: FloatingActionButton(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              onPressed: () {
+                Provider.of<ThemeProvider>(
+                  context,
+                  listen: false,
+                ).toggleTheme();
+              },
+              child: Consumer<ThemeProvider>(
+                builder: (context, themeProvider, child) {
+                  return Icon(
+                    themeProvider.themeData.brightness == Brightness.dark
+                        ? Icons.light_mode_outlined
+                        : Icons.dark_mode_outlined,
+                    color: Colors.white,
+                  );
+                },
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 20.0),
+            child: FloatingActionButton(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              child: Icon(Icons.add, color: Colors.white),
+              onPressed: () {
+                _showButton(context);
+              },
+            ),
+          ),
+        ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
@@ -76,6 +108,7 @@ class HomeScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: 125,
           child: Card(
+            color: Theme.of(context).colorScheme.surfaceContainer,
             child: Row(
               children: <Widget>[
                 SizedBox(
@@ -96,7 +129,11 @@ class HomeScreen extends StatelessWidget {
                       style: TextStyle(fontSize: 16, fontFamily: 'Roboto'),
                     ),
                     SizedBox(height: 4),
-                    Container(height: 2, width: 75, color: Colors.indigo),
+                    Container(
+                      height: 2,
+                      width: 75,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                     Text(
                       'By: ${recipe.author}',
                       style: TextStyle(fontFamily: 'Roboto'),
@@ -134,12 +171,19 @@ class RecipeForm extends StatelessWidget {
           children: <Widget>[
             Text(
               'Add a new recipe',
-              style: TextStyle(color: Colors.indigo, fontSize: 24),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.tertiary,
+                fontSize: 24,
+              ),
             ),
             SizedBox(height: 16),
             _buildTextField(
+              context: context,
               label: 'Recipe Name',
-              prefixIcon: Icon(Icons.restaurant, color: Colors.indigo),
+              prefixIcon: Icon(
+                Icons.restaurant,
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
               controller: recipeName,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -150,8 +194,12 @@ class RecipeForm extends StatelessWidget {
             ),
             SizedBox(height: 16),
             _buildTextField(
+              context: context,
               label: 'Author Name',
-              prefixIcon: Icon(Icons.person, color: Colors.indigo),
+              prefixIcon: Icon(
+                Icons.person,
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
               controller: authorName,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -162,8 +210,12 @@ class RecipeForm extends StatelessWidget {
             ),
             SizedBox(height: 16),
             _buildTextField(
+              context: context,
               label: 'Image URL',
-              prefixIcon: Icon(Icons.image, color: Colors.indigo),
+              prefixIcon: Icon(
+                Icons.image,
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
               controller: imageUrl,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -174,8 +226,12 @@ class RecipeForm extends StatelessWidget {
             ),
             SizedBox(height: 16),
             _buildTextField(
+              context: context,
               label: 'Recipe Instructions',
-              prefixIcon: Icon(Icons.description, color: Colors.indigo),
+              prefixIcon: Icon(
+                Icons.description,
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
               controller: recipeInstructions,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -194,7 +250,7 @@ class RecipeForm extends StatelessWidget {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.indigo,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -221,14 +277,21 @@ class RecipeForm extends StatelessWidget {
     required TextEditingController controller,
     required String? Function(String?) validator,
     int maxLines = 1,
+    required BuildContext context,
   }) {
     return TextFormField(
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: Colors.indigo, fontFamily: 'Roboto'),
+        labelStyle: TextStyle(
+          color: Theme.of(context).colorScheme.tertiary,
+          fontFamily: 'Roboto',
+        ),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.indigo, width: 1),
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.primary,
+            width: 1,
+          ),
           borderRadius: BorderRadius.circular(10),
         ),
         prefixIcon: prefixIcon,

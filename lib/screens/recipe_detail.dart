@@ -34,7 +34,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
             fontSize: 24,
           ),
         ),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {

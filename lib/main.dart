@@ -3,6 +3,7 @@ import 'package:recipe_book_flutter/screens/home_screen.dart';
 import 'package:recipe_book_flutter/screens/favorite_recipes_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_book_flutter/providers/recipes_provider.dart';
+import 'package:recipe_book_flutter/providers/theme_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,11 +17,17 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => RecipesProvider()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Recipe Book',
-        home: RecipeBook(),
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp(
+            theme: themeProvider.themeData,
+            debugShowCheckedModeBanner: false,
+            title: 'Recipe Book',
+            home: const RecipeBook(),
+          );
+        },
       ),
     );
   }
@@ -35,7 +42,7 @@ class RecipeBook extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.indigo,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           title: const Text(
             'Recipe Book',
             style: TextStyle(color: Colors.white),
