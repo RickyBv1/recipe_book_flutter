@@ -172,7 +172,7 @@ class RecipeForm extends StatelessWidget {
             Text(
               'Add a new recipe',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.tertiary,
                 fontSize: 24,
               ),
             ),
@@ -182,7 +182,7 @@ class RecipeForm extends StatelessWidget {
               label: 'Recipe Name',
               prefixIcon: Icon(
                 Icons.restaurant,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.tertiary,
               ),
               controller: recipeName,
               validator: (value) {
@@ -198,7 +198,7 @@ class RecipeForm extends StatelessWidget {
               label: 'Author Name',
               prefixIcon: Icon(
                 Icons.person,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.tertiary,
               ),
               controller: authorName,
               validator: (value) {
@@ -214,7 +214,7 @@ class RecipeForm extends StatelessWidget {
               label: 'Image URL',
               prefixIcon: Icon(
                 Icons.image,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.tertiary,
               ),
               controller: imageUrl,
               validator: (value) {
@@ -230,7 +230,7 @@ class RecipeForm extends StatelessWidget {
               label: 'Recipe Instructions',
               prefixIcon: Icon(
                 Icons.description,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.tertiary,
               ),
               controller: recipeInstructions,
               validator: (value) {
@@ -283,7 +283,7 @@ class RecipeForm extends StatelessWidget {
       decoration: InputDecoration(
         labelText: label,
         labelStyle: TextStyle(
-          color: Theme.of(context).colorScheme.primary,
+          color: Theme.of(context).colorScheme.tertiary,
           fontFamily: 'Roboto',
         ),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
