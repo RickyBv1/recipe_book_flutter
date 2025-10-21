@@ -10,7 +10,7 @@ class FavoriteRecipesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Consumer<RecipesProvider>(
         builder: (context, recipesProvider, child) {
           final favoriteRecipes = recipesProvider.favoriteRecipe;
@@ -45,9 +45,45 @@ class favoriteRecipeCard extends StatelessWidget {
           ),
         );
       },
-      child: Card(
-        color: Colors.white,
-        child: Column(children: [Text(recipe.name), Text(recipe.author)]),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 125,
+          child: Card(
+            color: Theme.of(context).colorScheme.surfaceContainer,
+            child: Row(
+              children: <Widget>[
+                SizedBox(
+                  height: 125,
+                  width: 100,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.network(recipe.image_link, fit: BoxFit.cover),
+                  ),
+                ),
+                SizedBox(width: 26),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      recipe.name,
+                      style: TextStyle(fontSize: 16, fontFamily: 'Roboto'),
+                    ),
+                    SizedBox(height: 4),
+                    Container(height: 2, width: 75, color: Colors.indigo),
+                    Text(
+                      'By: ${recipe.author}',
+                      style: TextStyle(fontFamily: 'Roboto'),
+                    ),
+                    SizedBox(height: 4),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
