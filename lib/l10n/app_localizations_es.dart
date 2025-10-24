@@ -18,6 +18,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get navBarFavorites => 'Favoritos';
 
   @override
+  String get noRecipesFound => 'No se encontraron recetas';
+
+  @override
   String get by => 'Por: ';
 
   @override

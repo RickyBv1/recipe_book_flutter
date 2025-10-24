@@ -3,6 +3,7 @@
     "title": "Recipe Book",
     "navBarHome": "Home",
     "navBarFavorites": "Favorites",
+    "noRecipesFound": "No recipes found",
     "by": "By: ",
     "recipeSteps": "Recipe Steps:",
     "addRecipe": "Add a new recipe",

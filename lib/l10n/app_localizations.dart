@@ -116,6 +116,12 @@ abstract class AppLocalizations {
   /// **'Favorites'**
   String get navBarFavorites;
 
+  /// No description provided for @noRecipesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No recipes found'**
+  String get noRecipesFound;
+
   /// No description provided for @by.
   ///
   /// In en, this message translates to:

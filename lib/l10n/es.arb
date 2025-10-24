@@ -3,6 +3,7 @@
     "title": "Libro de Recetas",
     "navBarHome": "Inicio",
     "navBarFavorites": "Favoritos",
+    "noRecipesFound": "No se encontraron recetas",
     "by": "Por: ",
     "recipeSteps": "Pasos de la receta:",
     "addRecipe": "Agregar una nueva receta",

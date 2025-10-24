@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_book_flutter/models/recipe_model.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_book_flutter/providers/recipes_provider.dart';
+import 'package:recipe_book_flutter/l10n/app_localizations.dart';
 
 class RecipeDetail extends StatefulWidget {
   final Recipe recipesData;
@@ -73,7 +74,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
               ),
             ),
             Text(
-              'Recipe Steps:',
+              AppLocalizations.of(context)!.recipeSteps,
               style: TextStyle(fontSize: 16, fontFamily: 'Roboto'),
             ),
             Text(
@@ -81,7 +82,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
               style: TextStyle(fontSize: 16, fontFamily: 'Roboto'),
             ),
             Text(
-              'By: ${widget.recipesData.author}',
+              '${AppLocalizations.of(context)!.by}${widget.recipesData.author}',
               style: TextStyle(fontSize: 16, fontFamily: 'Roboto'),
             ),
           ],

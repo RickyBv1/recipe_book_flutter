@@ -52,8 +52,8 @@ class RecipeBook extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
-          title: const Text(
-            'Recipe Book',
+          title: Text(
+            AppLocalizations.of(context)!.title,
             style: TextStyle(color: Colors.white),
           ),
           bottom: TabBar(
@@ -61,10 +61,13 @@ class RecipeBook extends StatelessWidget {
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white60,
             tabs: [
-              Tab(icon: Icon(Icons.home_outlined), text: 'Home'),
+              Tab(
+                icon: Icon(Icons.home_outlined),
+                text: AppLocalizations.of(context)!.navBarHome,
+              ),
               Tab(
                 icon: Icon(Icons.favorite_outline_rounded),
-                text: 'Favorites',
+                text: AppLocalizations.of(context)!.navBarFavorites,
               ),
             ],
           ),
