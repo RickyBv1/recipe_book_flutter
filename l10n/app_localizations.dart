@@ -97,6 +97,102 @@ abstract class AppLocalizations {
     Locale('en'),
     Locale('es'),
   ];
+
+  /// No description provided for @title.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe Book'**
+  String get title;
+
+  /// No description provided for @navBarHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get navBarHome;
+
+  /// No description provided for @navBarFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get navBarFavorites;
+
+  /// No description provided for @by.
+  ///
+  /// In en, this message translates to:
+  /// **'By: '**
+  String get by;
+
+  /// No description provided for @recipeSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe Steps:'**
+  String get recipeSteps;
+
+  /// No description provided for @addRecipe.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a new recipe'**
+  String get addRecipe;
+
+  /// No description provided for @recipeName.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe Name'**
+  String get recipeName;
+
+  /// No description provided for @authorName.
+  ///
+  /// In en, this message translates to:
+  /// **'Author Name'**
+  String get authorName;
+
+  /// No description provided for @imageUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Image URL'**
+  String get imageUrl;
+
+  /// No description provided for @recipeInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe Instructions'**
+  String get recipeInstructions;
+
+  /// No description provided for @saveRecipeButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Recipe'**
+  String get saveRecipeButton;
+
+  /// No description provided for @recipeNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe name is required'**
+  String get recipeNameRequired;
+
+  /// No description provided for @authorNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Author name is required'**
+  String get authorNameRequired;
+
+  /// No description provided for @imageUrlRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Image URL is required'**
+  String get imageUrlRequired;
+
+  /// No description provided for @recipeInstructionsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipe instructions are required'**
+  String get recipeInstructionsRequired;
+
+  /// No description provided for @emptyFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'No favorite recipes yet'**
+  String get emptyFavorites;
 }
 
 class _AppLocalizationsDelegate

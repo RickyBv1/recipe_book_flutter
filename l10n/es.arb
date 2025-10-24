@@ -1,3 +1,19 @@
 {
-    "@@locale": "es"
+    "@@locale": "es",
+    "title": "Libro de Recetas",
+    "navBarHome": "Inicio",
+    "navBarFavorites": "Favoritos",
+    "by": "Por: ",
+    "recipeSteps": "Pasos de la receta:",
+    "addRecipe": "Agregar una nueva receta",
+    "recipeName": "Nombre de la receta",
+    "authorName": "Nombre del autor",
+    "imageUrl": "URL de la imagen",
+    "recipeInstructions": "Instrucciones de la receta",
+    "saveRecipeButton": "Guardar receta",
+    "recipeNameRequired": "El nombre de la receta es requerido",
+    "authorNameRequired": "El nombre del autor es requerido",
+    "imageUrlRequired": "La URL de la imagen es requerida",
+    "recipeInstructionsRequired": "Las instrucciones de la receta son requeridas",
+    "emptyFavorites": "No hay recetas favoritas todavía"
 }
