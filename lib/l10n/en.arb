@@ -1,0 +1,20 @@
+{
+    "@@locale": "en",
+    "title": "Recipe Book",
+    "navBarHome": "Home",
+    "navBarFavorites": "Favorites",
+    "noRecipesFound": "No recipes found",
+    "by": "By: ",
+    "recipeSteps": "Recipe Steps:",
+    "addRecipe": "Add a new recipe",
+    "recipeName": "Recipe Name",
+    "authorName": "Author Name",
+    "imageUrl": "Image URL",
+    "recipeInstructions": "Recipe Instructions",
+    "saveRecipeButton": "Save Recipe",
+    "recipeNameRequired": "Recipe name is required",
+    "authorNameRequired": "Author name is required",
+    "imageUrlRequired": "Image URL is required",
+    "recipeInstructionsRequired": "Recipe instructions are required",
+    "emptyFavorites": "No favorite recipes yet"
+}

@@ -4,6 +4,7 @@ import 'package:recipe_book_flutter/models/recipe_model.dart';
 import 'package:recipe_book_flutter/screens/recipe_detail.dart';
 import 'package:recipe_book_flutter/providers/recipes_provider.dart';
 import 'package:recipe_book_flutter/providers/theme_provider.dart';
+import 'package:recipe_book_flutter/l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,7 +24,9 @@ class HomeScreen extends StatelessWidget {
           if (provider.isLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (provider.recipes.isEmpty) {
-            return const Center(child: Text('No recipes found'));
+            return Center(
+              child: Text(AppLocalizations.of(context)!.noRecipesFound),
+            );
           } else {
             return ListView.builder(
               itemCount: provider.recipes.length,
@@ -170,7 +173,7 @@ class RecipeForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Add a new recipe',
+              AppLocalizations.of(context)!.addRecipe,
               style: TextStyle(
                 color: Theme.of(context).colorScheme.tertiary,
                 fontSize: 24,
@@ -179,7 +182,7 @@ class RecipeForm extends StatelessWidget {
             SizedBox(height: 16),
             _buildTextField(
               context: context,
-              label: 'Recipe Name',
+              label: AppLocalizations.of(context)!.recipeName,
               prefixIcon: Icon(
                 Icons.restaurant,
                 color: Theme.of(context).colorScheme.tertiary,
@@ -187,7 +190,7 @@ class RecipeForm extends StatelessWidget {
               controller: recipeName,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Recipe name is required';
+                  return AppLocalizations.of(context)!.recipeNameRequired;
                 }
                 return null;
               },
@@ -195,7 +198,7 @@ class RecipeForm extends StatelessWidget {
             SizedBox(height: 16),
             _buildTextField(
               context: context,
-              label: 'Author Name',
+              label: AppLocalizations.of(context)!.authorName,
               prefixIcon: Icon(
                 Icons.person,
                 color: Theme.of(context).colorScheme.tertiary,
@@ -203,7 +206,7 @@ class RecipeForm extends StatelessWidget {
               controller: authorName,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Author name is required';
+                  return AppLocalizations.of(context)!.authorNameRequired;
                 }
                 return null;
               },
@@ -211,7 +214,7 @@ class RecipeForm extends StatelessWidget {
             SizedBox(height: 16),
             _buildTextField(
               context: context,
-              label: 'Image URL',
+              label: AppLocalizations.of(context)!.imageUrl,
               prefixIcon: Icon(
                 Icons.image,
                 color: Theme.of(context).colorScheme.tertiary,
@@ -219,7 +222,7 @@ class RecipeForm extends StatelessWidget {
               controller: imageUrl,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Image URL is required';
+                  return AppLocalizations.of(context)!.imageUrlRequired;
                 }
                 return null;
               },
@@ -227,7 +230,7 @@ class RecipeForm extends StatelessWidget {
             SizedBox(height: 16),
             _buildTextField(
               context: context,
-              label: 'Recipe Instructions',
+              label: AppLocalizations.of(context)!.recipeInstructions,
               prefixIcon: Icon(
                 Icons.description,
                 color: Theme.of(context).colorScheme.tertiary,
@@ -235,7 +238,9 @@ class RecipeForm extends StatelessWidget {
               controller: recipeInstructions,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Recipe instructions are required';
+                  return AppLocalizations.of(
+                    context,
+                  )!.recipeInstructionsRequired;
                 }
                 return null;
               },
@@ -256,7 +261,7 @@ class RecipeForm extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Save Recipe',
+                  AppLocalizations.of(context)!.saveRecipeButton,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
