@@ -1,6 +1,8 @@
 {
     "@@locale": "en",
     "title": "Recipe Book",
+    "english": "English",
+    "spanish": "Spanish",
     "navBarHome": "Home",
     "navBarFavorites": "Favorites",
     "noRecipesFound": "No recipes found",

@@ -104,6 +104,18 @@ abstract class AppLocalizations {
   /// **'Recipe Book'**
   String get title;
 
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @spanish.
+  ///
+  /// In en, this message translates to:
+  /// **'Spanish'**
+  String get spanish;
+
   /// No description provided for @navBarHome.
   ///
   /// In en, this message translates to:
