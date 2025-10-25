@@ -1,6 +1,8 @@
 {
     "@@locale": "es",
     "title": "Libro de Recetas",
+    "english": "Inglés",
+    "spanish": "Español",
     "navBarHome": "Inicio",
     "navBarFavorites": "Favoritos",
     "noRecipesFound": "No se encontraron recetas",

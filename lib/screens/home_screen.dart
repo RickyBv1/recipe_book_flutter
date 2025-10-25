@@ -138,7 +138,7 @@ class HomeScreen extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     Text(
-                      'By: ${recipe.author}',
+                      '${AppLocalizations.of(context)!.by}${recipe.author}',
                       style: TextStyle(fontFamily: 'Roboto'),
                     ),
                     SizedBox(height: 4),

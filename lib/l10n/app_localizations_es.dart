@@ -12,6 +12,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get title => 'Libro de Recetas';
 
   @override
+  String get english => 'Inglés';
+
+  @override
+  String get spanish => 'Español';
+
+  @override
   String get navBarHome => 'Inicio';
 
   @override
